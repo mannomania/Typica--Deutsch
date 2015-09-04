@@ -1,5 +1,5 @@
 <window id="fypurchase">
-	<reporttitle>Einkauf:->Roh Kaffee Einkauf Im Vergleich</reporttitle>
+	<reporttitle>Einkauf:->Roh Kaffee Einkauf im Jahres Vergleich</reporttitle>
 	<layout type="vertical">
 		<layout type="horizontal">
 			<daterange id = "dates" initial="23" /><!--Lifetime-->
@@ -14,11 +14,11 @@
 	</menu>
 	<program>
 		<![CDATA[
-			this.windowTitle = "Typica - Roh Kaffee Einkauf Im Vergleich";
+			this.windowTitle = "Typica - Roh Kaffee Einkauf im Jahres Vergleich";
 			/* Set Lifetime range. */
 			var dateSelect = findChildObject(this, 'dates');
 			var query = new QSqlQuery();
-			query.exec("SELECT concat(EXTRACT(YEAR FROM time::date), '-01-01') FROM purchase WHERE time = (SELECT min(time) FROM purchase) UNION SELECT concat(EXTRACT(YEAR FROM 'now'::date), '-12-31')");
+			query.exec("SELECT concat(EXTRACT(YEAR FROM time::date), '-01-01') FROM purchase WHERE time = (SELECT min(time) FROM purchase) UNION SELECT concat(EXTRACT(YEAR FROM 'now'::date), '-12-31') ORDER BY concat ASC");
 			query.next();
 			var lifetimeStartDate = query.value(0);
 			query.next();
@@ -50,10 +50,10 @@
                 output.writeStartElement("html");
                 output.writeAttribute("xmlns", "http://www.w3.org/1999/xhtml");
                 output.writeStartElement("head");
-				output.writeTextElement("title", "Roh Kaffee Einkauf Im Vergleich");
+				output.writeTextElement("title", "Roh Kaffee Einkauf im Jahres Vergleich");
 				output.writeEndElement();
 				output.writeStartElement("body");
-				output.writeTextElement("h1", "Roh Kaffee Einkauf Im Vergleich");
+				output.writeTextElement("h1", "Roh Kaffee Einkauf im Jahres Vergleich");
 				output.writeStartElement("table");
 				output.writeAttribute("style", "page-break-after: auto; text-align: left");
 				output.writeAttribute("rules", "groups");
@@ -67,10 +67,10 @@
 						output.writeTextElement("th", "Kilos Gekauft");
 						break;
 					case 1:
-						output.writeTextElement("th", "Pounds Gekauft");
+						output.writeTextElement("th", "Pfund Gekauft");
 						break;
 				}
-				output.writeTextElement("th", "Cost");
+				output.writeTextElement("th", "Kost");
 				output.writeEndElement(); //tr
 				output.writeEndElement(); //thead
 				output.writeStartElement("tbody");
