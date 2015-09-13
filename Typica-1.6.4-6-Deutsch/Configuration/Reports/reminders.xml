@@ -136,10 +136,10 @@
                 output.writeStartElement("html");
                 output.writeAttribute("xmlns", "http://www.w3.org/1999/xhtml");
                 output.writeStartElement("head");
-                output.writeTextElement("title", "Reminders");
+                output.writeTextElement("title", "Kalender");
                 output.writeEndElement();
                 output.writeStartElement("body");
-                output.writeTextElement("h1", "Reminders");
+                output.writeTextElement("h1", "Kalender");
                 output.writeStartElement("a");
                 output.writeAttribute("href", "typica://script/0");
                 output.writeStartElement("div");
@@ -149,7 +149,7 @@
                 output.writeEndElement();
                 output.writeStartElement("span");
                 output.writeAttribute("class", "title");
-                output.writeCDATA("New Reminder");
+                output.writeCDATA("Neuer Termin");
                 output.writeEndElement();
                 output.writeEndElement();
                 output.writeEndElement();
