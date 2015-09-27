@@ -5,14 +5,14 @@
 	<layout type="horizontal">
     <layout type="vertical">
         <layout type="horizontal">
-			<label>Machine:</label>
+			<label>Maschine:</label>
 			<line id="machine" writable="false" />
-			<label>Einheit:</label>
+			<label>Gewichtseinheit:</label>
 			<sqldrop id="unit" />
             <stretch />
         </layout>
         <layout type="horizontal">
-            <label>Geroesteter Kaffee:</label>
+            <label>Produkt:</label>
             <sqldrop data="0" display="1" showdata="true" id="roasted">
                 <null />
                 <query>SELECT id, name FROM items WHERE category = 'Coffee: Roasted' AND id IN (SELECT item FROM current_items) ORDER BY name</query>
@@ -31,10 +31,10 @@
         </layout>
         <layout type="horizontal">
             <button name="Profil Laden" type="push" id="load" />
-            <button name="Kein Profil" type="push" id="noprofile" />
+            <button name="Keine Profil" type="push" id="noprofile" />
         </layout>
         <layout type="horizontal">
-            <label>Uhrzeit:</label>
+            <label>Datum:</label>
             <line id="time" writable="false" />
             <label>Dauer:</label>
             <line id="duration" writable="false" />
@@ -44,7 +44,7 @@
             <line id="roast" validator="numeric" />
             <label>Verlust:</label>
             <line id="wloss" writable="false" />
-            <button type="check" id="approval" name="Akzeptiert" />
+            <button type="check" id="approval" name="Akzeptierbar" />
         </layout>
         <layout type="horizontal">
             <label>Bemerkungen:</label>
@@ -52,7 +52,7 @@
         </layout>
         <layout type="horizontal">
             <button name="Akzeptieren" id="submit" type="push" />
-            <button name="Batch als Ziel Profil speichern" type="check" id="target" />
+            <button name="Als Ziel Profil Speichern" type="check" id="target" />
         </layout>
     </layout>
 	<layout type="vertical">
@@ -69,6 +69,9 @@
             unitBox.addItem("oz");
             unitBox.addItem("lb");
             unitBox.currentIndex = (QSettings.value("script/batch_unit", unitBox.findText("lb")));
+            unitBox['currentIndexChanged(int)'].connect(function() {
+                QSettings.setValue("script/batch_unit", unitBox.currentIndex);
+            });
             var machine = findChildObject(this, "machine");
             machine.setText(selectedRoasterName + " (" + selectedRoasterID + ")");
             var newMenu = findChildObject(this, 'new');
@@ -460,14 +463,6 @@
                 query = query.invalidate();
                 batch.windowModified = false;
                 batch.close();
-            });
-			            submitbutton.enabled = false;
-            roastwt.textChanged.connect(function(a) {
-                if(a.length > 0) {
-                    submitbutton.enabled = true;
-                } else {
-                    submitbutton.enabled = false;
-                }
             });
         ]]>
     </program>
