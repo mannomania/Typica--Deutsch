@@ -1,7 +1,7 @@
 <window id="purchase">
     <layout type="vertical">
         <layout type="horizontal">
-            <button name="Add Item" type="push" id="newForm" />
+            <button name="Neue Eintragung" type="push" id="newForm" />
             <label>Datum:</label>
             <calendar id="date"/>
             <label>Verkaufer:</label>
@@ -73,7 +73,7 @@
                         </sqldrop>
                     </column>
                     <column />
-                    <column><label>Grad:</label></column>
+                    <column><label>Gradierung:</label></column>
                     <column>
                         <sqldrop data="0" display="0" showdata="false" editable="true" id="grade">
                             <query>SELECT DISTINCT grade FROM coffees UNION SELECT '' ORDER BY grade ASC</query>
@@ -101,7 +101,7 @@
                         <line validator="numeric" id="bags" />
                     </column>
                     <column>
-                        <button type="check" id="isDecaf" name="Decaffeinated" />
+                        <button type="check" id="isDecaf" name="Entkoffeiniert" />
                     </column>
                     <column><label>bei methode:</label></column>
                     <column>
@@ -115,7 +115,7 @@
                         <line id="certdisplay" writable="false" />
                     </column>
                     <column column="2">
-                        <button type="push" name="Add Zertification" id="addcert" />
+                        <button type="push" name="Extra Zertifikat Nummer" id="addcert" />
                     </column>
                     <column colspan="2">
                         <line id="certification" />
